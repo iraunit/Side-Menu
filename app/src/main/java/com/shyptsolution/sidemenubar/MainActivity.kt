@@ -10,6 +10,7 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import java.lang.IllegalStateException
 
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.home -> {
                     Toast.makeText(applicationContext, "Home is Selected", Toast.LENGTH_SHORT)
                         .show()
+                    setCurrentFragment(HomeFragment())
                     driver.closeDrawer(GravityCompat.START)
                 }
 
@@ -66,6 +68,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    fun setCurrentFragment(fragment: Fragment){
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.mainframe,fragment).commit()
+        }
     }
 
 
